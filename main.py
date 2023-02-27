@@ -78,11 +78,10 @@ def copyWriter(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.json()
 
-merged_text = ""
 if uploaded_file is not None:
     output_string = StringIO()
     
-    parser = PDFParser(in_file)
+    parser = PDFParser(uploaded_file)
     doc = PDFDocument(parser)
     rsrcmgr = PDFResourceManager()
     device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
