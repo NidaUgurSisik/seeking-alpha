@@ -5,6 +5,14 @@ import streamlit as st
 import requests
 from PyPDF2 import PdfReader
 from functionforDownloadButtons import download_button
+from io import StringIO
+
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfdocument import PDFDocument
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.pdfpage import PDFPage
+from pdfminer.pdfparser import PDFParser
 
 
 def _max_width_():
@@ -72,24 +80,17 @@ def copyWriter(payload):
 
 merged_text = ""
 if uploaded_file is not None:
-    reader = PdfReader(uploaded_file)
-    print(len(reader.pages))
-
-    for i in range(len(reader.pages)):
-        # getting a specific page from the pdf file
-        page = reader.pages[i]
-
-        # extracting text from page
-        text = page.extract_text()
-        merged_text += text
-
-        print(merged_text + '\n')
-
-        output = copyWriter({
-            "inputs": merged_text,
-        })
+    output_string = StringIO()
+    with open(uploaded_file, 'rb') as in_file:
+        parser = PDFParser(in_file)
+        doc = PDFDocument(parser)
+        rsrcmgr = PDFResourceManager()
+        device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
+        interpreter = PDFPageInterpreter(rsrcmgr, device)
+        for page in PDFPage.create_pages(doc):
+            interpreter.process_page(page)
 
     #st.write(merged_text)
-    st.write(merged_text)
+    st.write(output_string.getvalue())
 
 st.write(output)
