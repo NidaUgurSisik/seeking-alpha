@@ -90,6 +90,6 @@ if uploaded_file is not None:
         })
 
     #st.write(merged_text)
-
+    st.write(merged_text)
 
 st.write(output)
