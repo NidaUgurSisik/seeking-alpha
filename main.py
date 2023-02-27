@@ -93,7 +93,4 @@ if uploaded_file is not None:
         })
 
     #st.write(merged_text)
-    st.write(output_string.getvalue())
-for i in output:
-    output_string[i['start'], i['end']]
     st.write(len(output_string))
