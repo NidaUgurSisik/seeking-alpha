@@ -96,5 +96,7 @@ if uploaded_file is not None:
     st.write(output_string.getvalue())
     result_text = output_string.getvalue()
 mask_char = '*'
-
+for i in output:
+    #output_string[i['start'], i['end']]
+    result_text = result_text[:i['start']] + mask_char*(i['start']-i['end']) + result_text[i['end']:]
 st.write(result_text)
