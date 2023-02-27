@@ -95,4 +95,4 @@ if uploaded_file is not None:
     #st.write(merged_text)
     st.write(output_string.getvalue())
 for i in output:
-    st.write(i['start'])
+    st.write(i['start'], i['end'])
