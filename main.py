@@ -82,13 +82,16 @@ merged_text = ""
 if uploaded_file is not None:
     output_string = StringIO()
     
-    parser = PDFParser(uploaded_file)
+    parser = PDFParser(in_file)
     doc = PDFDocument(parser)
     rsrcmgr = PDFResourceManager()
     device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
     interpreter = PDFPageInterpreter(rsrcmgr, device)
     for page in PDFPage.create_pages(doc):
         interpreter.process_page(page)
+    output = copyWriter({
+            "inputs": output_string.getvalue(),
+        })
 
     #st.write(merged_text)
     st.write(output_string.getvalue())
