@@ -81,7 +81,7 @@ def copyWriter(payload):
 merged_text = ""
 if uploaded_file is not None:
     output_string = StringIO()
-    with open(uploaded_file, 'rb') as in_file:
+    with open(uploaded_file) as in_file:
         parser = PDFParser(in_file)
         doc = PDFDocument(parser)
         rsrcmgr = PDFResourceManager()
@@ -90,7 +90,7 @@ if uploaded_file is not None:
         for page in PDFPage.create_pages(doc):
             interpreter.process_page(page)
 
-    #st.write(merged_text)a
+    #st.write(merged_text)
     st.write(output_string.getvalue())
 
 st.write(output)
