@@ -99,4 +99,4 @@ mask_char = '*'
 for i in output:
     #output_string[i['start'], i['end']]
     result_text = result_text[:i['start']] + mask_char*(i['end']-i['start']) + result_text[i['end']:]
-st.write(result_text[0])
+st.write(result_text[0:10])
