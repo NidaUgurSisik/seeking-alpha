@@ -94,6 +94,8 @@ if uploaded_file is not None:
 
     #st.write(merged_text)
     st.write(output_string.getvalue())
+mask_char = '*'
 for i in output:
     #output_string[i['start'], i['end']]
-    st.write(i)
+    masked_text = output_string[:i['start']] + mask_char*(i['start']-i['end']) + output_string[i['end']:]
+st.write(masked_text)
