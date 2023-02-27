@@ -94,6 +94,7 @@ if uploaded_file is not None:
 
     #st.write(merged_text)
     st.write(output_string.getvalue())
+    result_text = output_string.getvalue()
 mask_char = '*'
 
-st.write(output_string)
+st.write(result_text)
