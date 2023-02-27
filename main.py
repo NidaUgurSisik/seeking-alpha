@@ -90,7 +90,7 @@ if uploaded_file is not None:
         for page in PDFPage.create_pages(doc):
             interpreter.process_page(page)
 
-    #st.write(merged_text)
+    #st.write(merged_text)a
     st.write(output_string.getvalue())
 
 st.write(output)
