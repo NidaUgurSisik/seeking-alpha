@@ -101,5 +101,5 @@ for i in output:
     result_text = result_text[:i['start']] + mask_char*(i['end']-i['start']) + result_text[i['end']:]
 
 st.write(result_text)
-last_result = re.sub(r'\*{5,}', '***', result_text)
+last_result = re.sub(r'\*{5,}', '*****', result_text)
 st.write(last_result)
