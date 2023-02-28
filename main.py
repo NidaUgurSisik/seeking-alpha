@@ -98,5 +98,5 @@ if uploaded_file is not None:
 mask_char = '*'
 for i in output:
     #output_string[i['start'], i['end']]
-    result_text = result_text[:i['start']] + mask_char*(i['end']-i['start']) + result_text[i['end']:]
+    result_text = result_text[:i['start']] + mask_char*(3) + result_text[i['end']:]
 st.write(result_text)
