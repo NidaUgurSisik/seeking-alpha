@@ -93,6 +93,7 @@ if uploaded_file is not None:
         })
 
     #st.write(merged_text)
+    st.subheader('Your text before processing.')
     st.write(output_string.getvalue())
     result_text = output_string.getvalue()
 mask_char = '*'
@@ -101,5 +102,6 @@ for i in output:
     result_text = result_text[:i['start']] + mask_char*(i['end']-i['start']) + result_text[i['end']:]
 
 st.write(result_text)
+st.subheader('Your text after processing.')
 last_result = re.sub(r'\*{5,}', '*****', result_text)
 st.write(last_result)
