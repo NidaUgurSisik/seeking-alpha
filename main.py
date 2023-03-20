@@ -50,13 +50,11 @@ with c2:
             "images/logo.png",
             width=200,
         )
+    Stock = st.text_input('Stock Name', '')
+    st.write('The current Stock Name is', Stock)
 
 
 
 def GetArticle():
     response = requests.request("GET", url, headers=headers, params=querystring).json()
     return response
-
-with c3:
-    Stock = st.text_input('Stock Name', '')
-    st.write('The current Stock Name is', Stock)
