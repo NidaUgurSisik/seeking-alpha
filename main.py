@@ -51,7 +51,8 @@ with c2:
             width=200,
         )
     Stock = st.text_input('Stock Name', '')
-    st.write('The current Stock Name is', Stock)
+    if Stock:
+        st.write('The current Stock Name is', Stock)
 
 
 
