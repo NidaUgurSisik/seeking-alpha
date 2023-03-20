@@ -56,10 +56,9 @@ with c2:
             width=200,
         )
     Stock = st.text_input('Stock Name', '')
-    if Stock:
-        st.write('The current Stock Name is', Stock)
     Size = st.text_input('How much article do you want ?', '')
     if Stock and Size:
+        st.write(Size ,' Article for ', Stock, 'Stock')
         x = getArticle(Stock,int(Size))
         st.write(x)
 
