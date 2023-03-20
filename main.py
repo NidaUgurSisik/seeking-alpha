@@ -26,17 +26,17 @@ def _max_width_():
 
 st.set_page_config(page_icon="images/icon.png", page_title="Seeking Alpha")
 
+def getArticle(keyword, size):
+    url = "https://seeking-alpha.p.rapidapi.com/analysis/v2/list"
 
-url = "https://seeking-alpha.p.rapidapi.com/analysis/v2/list"
+    querystring = {"id":keyword,"size":size,"number":"1"}
 
-querystring = {"id":'tsla',"size":'5',"number":"1"}
+    headers = {
+        "X-RapidAPI-Key": "7b530f132bmsh9ce89c66c2eb5d1p1864c8jsnd7c0c3f9ed02",
+        "X-RapidAPI-Host": "seeking-alpha.p.rapidapi.com"
+    }
 
-headers = {
-	"X-RapidAPI-Key": "7b530f132bmsh9ce89c66c2eb5d1p1864c8jsnd7c0c3f9ed02",
-	"X-RapidAPI-Host": "seeking-alpha.p.rapidapi.com"
-}
-
-response = requests.request("GET", url, headers=headers, params=querystring).json()
+    response = requests.request("GET", url, headers=headers, params=querystring).json()
 
 c2, c3 = st.columns([6, 1])
 
@@ -53,9 +53,7 @@ with c2:
     Stock = st.text_input('Stock Name', '')
     if Stock:
         st.write('The current Stock Name is', Stock)
+    Size = st.text_input('How much article do you want ?', '')
 
 
 
-def GetArticle():
-    response = requests.request("GET", url, headers=headers, params=querystring).json()
-    return response
