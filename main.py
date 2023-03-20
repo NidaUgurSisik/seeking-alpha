@@ -24,12 +24,12 @@ def _max_width_():
         unsafe_allow_html=True,
     )
 
-st.set_page_config(page_icon="images/icon.png", page_title="Entity Extractor")
+st.set_page_config(page_icon="images/icon.png", page_title="Seeking Alpha")
 
 
 url = "https://seeking-alpha.p.rapidapi.com/analysis/v2/list"
 
-querystring = {"id":keyword,"size":size,"number":"1"}
+querystring = {"id":'tsla',"size":'5',"number":"1"}
 
 headers = {
 	"X-RapidAPI-Key": "7b530f132bmsh9ce89c66c2eb5d1p1864c8jsnd7c0c3f9ed02",
