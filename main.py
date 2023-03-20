@@ -37,7 +37,11 @@ def getArticle(keyword, size):
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring).json()
-
+    links = []
+    for i in range(size):
+        link = 'https://seekingalpha.com' + response['data'][i]['links']['self']
+        links.append(link)
+    return links
 c2, c3 = st.columns([6, 1])
 
 with c2:
@@ -54,6 +58,8 @@ with c2:
     if Stock:
         st.write('The current Stock Name is', Stock)
     Size = st.text_input('How much article do you want ?', '')
-
+    if Stock:
+        x = getArticle(Stock,Size)
+        st.write(x)
 
 
