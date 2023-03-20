@@ -60,7 +60,7 @@ with c2:
         st.write('The current Stock Name is', Stock)
     Size = st.text_input('How much article do you want ?', '')
     if Stock and Size:
-        x = getArticle(Stock,Size)
+        x = getArticle(Stock,int(Size))
         st.write(x)
 
 
