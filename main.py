@@ -11,7 +11,7 @@ from io import StringIO
 from streamlit_tags import st_tags
 API_URL = "https://api-inference.huggingface.co/models/joeddav/xlm-roberta-large-xnli"
 
-headers = {"Authorization": f"Bearer {os.getenv('API_KEY')}"}
+headers = {"Authorization": f"Bearer {os.getenv('openaiapi_key')}"}
 
 def _max_width_():
     max_width_str = f"max-width: 1800px;"
