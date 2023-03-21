@@ -7,7 +7,8 @@ import requests
 from PyPDF2 import PdfReader
 from functionforDownloadButtons import download_button
 from io import StringIO
-
+from streamlit_tags import st_tags
+API_URL = "https://api-inference.huggingface.co/models/joeddav/xlm-roberta-large-xnli"
 
 
 def _max_width_():
@@ -76,5 +77,44 @@ with c2:
         x = getArticle(Stock,int(Size))
         y = ArticleText(x)
         st.write(y)
+
+    def get_values(column_names, labels_from_st_tags ):
+        def query(payload):
+            response = requests.post(API_URL, headers=headers, json=payload)
+            return response.json()
+
+
+        label_lists = {}
+
+        for element in labels_from_st_tags:
+            label_lists[element] = []
+
+        for index, row in df[column_names].items():
+
+            output = query({
+                "inputs": row,
+                "parameters": {"candidate_labels": labels_from_st_tags},
+            })
+
+            for index_, value in enumerate(output['labels']):
+                label_lists[value].append(round(output['scores'][index_],2))
+
+        for vals in labels_from_st_tags:
+            df[vals] = label_lists[vals]
+        return
+
+
+
+    form = st.form(key="annotation")
+    with form:
+
+        labels_from_st_tags = st_tags(
+            value=["account", "credit", "reporting"],
+            maxtags=5,
+            suggestions=["account", "credit", "reporting"],
+            label="",
+        )
+
+        submitted = st.form_submit_button(label="Submit")
 
 
