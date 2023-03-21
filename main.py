@@ -9,7 +9,7 @@ from PyPDF2 import PdfReader
 from functionforDownloadButtons import download_button
 from io import StringIO
 from streamlit_tags import st_tags
-API_URL = "https://api-inference.huggingface.co/models/joeddav/xlm-roberta-large-xnli"
+API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-mnli"
 
 headers = {"Authorization": f"Bearer {os.getenv('API_KEY')}"}
 
