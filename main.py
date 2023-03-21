@@ -44,6 +44,7 @@ def getArticle(keyword, size):
     return links
 
 def ArticleText(links):
+    texts = []
     for link in links:
         url = link    
         response = requests.get(url)        
@@ -53,8 +54,9 @@ def ArticleText(links):
         #print(text)
         text = text.split("Stock Ideas",1)[1]
         text = text.split("This article",1)[0]
-
-    print(text)
+        texts.append(text)
+        
+        return texts
 c2, c3 = st.columns([6, 1])
 
 with c2:
