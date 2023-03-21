@@ -56,7 +56,7 @@ def ArticleText(links):
         text = text.split("This article",1)[0]
         texts.append(text)
         
-        return texts
+    return texts
 c2, c3 = st.columns([6, 1])
 
 with c2:
