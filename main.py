@@ -11,7 +11,7 @@ from io import StringIO
 from streamlit_tags import st_tags
 API_URL = "https://api-inference.huggingface.co/models/joeddav/xlm-roberta-large-xnli"
 
-headers = {"Authorization": f"Bearer {os.getenv('openaiapi_key')}"}
+headers = {"Authorization": f"Bearer {os.getenv('API_KEY')}"}
 
 def _max_width_():
     max_width_str = f"max-width: 1800px;"
@@ -60,6 +60,7 @@ def ArticleText(links):
         texts.append(text)
         
     return texts
+
 def get_values(article_text,labels_from_st_tags):
         def query(payload):
             response = requests.post(API_URL, headers=headers, json=payload)
