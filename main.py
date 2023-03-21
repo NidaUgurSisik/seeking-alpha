@@ -58,7 +58,7 @@ def ArticleText(links):
         texts.append(text)
         
     return texts
-def get_values(labels_from_st_tags):
+def get_values(article_text,labels_from_st_tags):
         def query(payload):
             response = requests.post(API_URL, headers=headers, json=payload)
             return response.json()
