@@ -74,9 +74,9 @@ with c2:
     Size = st.text_input('How much article do you want ?', '')
     if Stock and Size:
         st.write(Size ,' Article for ', Stock, 'Stock')
-        x = getArticle(Stock,int(Size))
-        y = ArticleText(x)
-        st.write(y)
+        articleurl = getArticle(Stock,int(Size))
+        article_text = ArticleText(articleurl)
+        st.write(article_text)
 
     def get_values(column_names, labels_from_st_tags ):
         def query(payload):
@@ -89,19 +89,15 @@ with c2:
         for element in labels_from_st_tags:
             label_lists[element] = []
 
-        for index, row in df[column_names].items():
+        for row in article_text:
 
             output = query({
                 "inputs": row,
                 "parameters": {"candidate_labels": labels_from_st_tags},
             })
+            st.write(output)
 
-            for index_, value in enumerate(output['labels']):
-                label_lists[value].append(round(output['scores'][index_],2))
-
-        for vals in labels_from_st_tags:
-            df[vals] = label_lists[vals]
-        return
+        return output
 
 
 
