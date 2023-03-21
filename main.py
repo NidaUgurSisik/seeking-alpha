@@ -58,6 +58,30 @@ def ArticleText(links):
         texts.append(text)
         
     return texts
+def get_values(labels_from_st_tags):
+        def query(payload):
+            response = requests.post(API_URL, headers=headers, json=payload)
+            return response.json()
+
+
+        label_lists = {}
+
+        for element in labels_from_st_tags:
+            label_lists[element] = []
+
+        for row in article_text:
+
+            output = query({
+                "inputs": row,
+                "parameters": {"candidate_labels": labels_from_st_tags},
+            })
+
+            for index_, value in enumerate(output['labels']):
+                label_lists[value].append(round(output['scores'][index_],2))
+
+
+        return output
+
 c2, c3 = st.columns([6, 1])
 
 with c2:
@@ -78,27 +102,6 @@ with c2:
         article_text = ArticleText(articleurl)
         st.write(article_text)
 
-    def get_values(column_names, labels_from_st_tags ):
-        def query(payload):
-            response = requests.post(API_URL, headers=headers, json=payload)
-            return response.json()
-
-
-        label_lists = {}
-
-        for element in labels_from_st_tags:
-            label_lists[element] = []
-
-        for row in article_text:
-
-            output = query({
-                "inputs": row,
-                "parameters": {"candidate_labels": labels_from_st_tags},
-            })
-            st.write(output)
-
-        return output
-
 
 
     form = st.form(key="annotation")
@@ -113,4 +116,6 @@ with c2:
 
         submitted = st.form_submit_button(label="Submit")
 
-
+    if submitted:
+        result = get_values(article_text, labels_from_st_tags)
+        st.write(result)
