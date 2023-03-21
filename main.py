@@ -43,6 +43,18 @@ def getArticle(keyword, size):
         links.append(link)
     return links
 
+def ArticleText(links):
+    for link in links:
+        url = link    
+        response = requests.get(url)        
+        soup = BeautifulSoup(response.content, 'html.parser')        
+        text = soup.get_text()        
+
+        #print(text)
+        text = text.split("Stock Ideas",1)[1]
+        text = text.split("This article",1)[0]
+
+    print(text)
 c2, c3 = st.columns([6, 1])
 
 with c2:
@@ -60,6 +72,7 @@ with c2:
     if Stock and Size:
         st.write(Size ,' Article for ', Stock, 'Stock')
         x = getArticle(Stock,int(Size))
-        st.write(x)
+        y = ArticleText(x)
+        st.write(y)
 
 
