@@ -78,9 +78,6 @@ def get_values(article_text,labels_from_st_tags):
                 "parameters": {"candidate_labels": labels_from_st_tags},
             })
 
-            for index_, value in enumerate(output['labels']):
-                label_lists[value].append(round(output['scores'][index_],2))
-
 
         return output
 
