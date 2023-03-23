@@ -99,13 +99,14 @@ with c2:
     until = st.date_input(
         "When\'s your birthday",
         datetime.date(2019, 7, 6))
-    st.write('Your birthday is:', until)
     until_unix = time.mktime(until.timetuple())
+    st.write('Your birthday is:', until_unix)
+    
     since = st.date_input(
         "When\'s your birthday",
         datetime.date(2019, 7, 6))
     since_unix = time.mktime(since.timetuple())
-    st.write('Your birthday is:', since)
+    st.write('Your birthday is:', since_unix)
     if Stock and Size and until and since:
         st.write(Size ,' Article for ', Stock, 'Stock')
         articleurl = getArticle(Stock,int(Size))
