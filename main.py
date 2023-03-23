@@ -25,11 +25,11 @@ def _max_width_():
 
 st.set_page_config(page_icon="images/icon.png", page_title="Seeking Alpha")
 
-def getArticle(keyword, size,until_unix,since_unix):
+def getArticle(keyword,until_unix,since_unix):
     url = "https://seeking-alpha.p.rapidapi.com/analysis/v2/list"
 
     querystring = {until: until_unix,
-    since: since_unix,"id":keyword,"size":size,"number":"1"}
+    since: since_unix,"id":keyword,"number":"1"}
 
     headers = {
         "X-RapidAPI-Key": os.getenv('X-RapidAPI-Key'),
@@ -38,7 +38,7 @@ def getArticle(keyword, size,until_unix,since_unix):
 
     response = requests.request("GET", url, headers=headers, params=querystring).json()
     links = []
-    for i in range(size):
+    for i in response:
         link = 'https://seekingalpha.com' + response['data'][i]['links']['self']
         links.append(link)
     return links
@@ -96,7 +96,6 @@ with c2:
             width=200,
         )
     Stock = st.text_input('Stock Name', '')
-    Size = st.text_input('How much article do you want ?', '')
     until = st.date_input(
         "Until",
         datetime.date(2019, 7, 6))
@@ -108,9 +107,9 @@ with c2:
         datetime.date(2019, 7, 6))
     since_unix = time.mktime(since.timetuple())
     st.write('Since', since_unix)
-    if Stock and Size and until and since:
-        st.write(Size ,' Article for ', Stock, 'Stock')
-        articleurl = getArticle(Stock,int(Size),until_unix,since_unix)
+    if Stock and until and since:
+        st.write(' Article for ', Stock, 'Stock')
+        articleurl = getArticle(Stock,until_unix,since_unix)
         article_text = ArticleText(articleurl)
 
 
