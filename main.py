@@ -38,7 +38,7 @@ def getArticle(keyword,until_unix,since_unix):
 
     response = requests.request("GET", url, headers=headers, params=querystring).json()
     links = []
-    for i in range(response['data']):
+    for i in range(len(response['data'])):
         link = 'https://seekingalpha.com' + response['data'][i]['links']['self']
         links.append(link)
     return links
