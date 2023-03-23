@@ -96,23 +96,19 @@ with c2:
             width=200,
         )
     Stock = st.text_input('Stock Name', '')
-    until = st.date_input(
-        "Until",
-        datetime.date(2019, 7, 6))
-    until_unix = time.mktime(until.timetuple())
-    st.write('Until', until_unix)
-    
     since = st.date_input(
         "Since",
         datetime.date(2019, 7, 6))
     since_unix = time.mktime(since.timetuple())
-    st.write('Since', since_unix)
+    until = st.date_input(
+        "Until",
+        datetime.date(2019, 7, 6))
+    until_unix = time.mktime(until.timetuple())
+
     if Stock and until and since:
         st.write(' Article for ', Stock, 'Stock')
         articleurl = getArticle(Stock,until_unix,since_unix)
         article_text = ArticleText(articleurl)
-
-
 
     form = st.form(key="annotation")
     with form:
