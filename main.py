@@ -80,7 +80,7 @@ def get_values(article_text,labels_from_st_tags):
 
         return df
 
-c2, c3 = st.columns([18, 1])
+c2, c3 = st.columns([25, 1])
 
 with c2:
     c31, c32 = st.columns([12, 2])
