@@ -28,8 +28,8 @@ st.set_page_config(page_icon="images/icon.png", page_title="Seeking Alpha")
 def getArticle(keyword,until_unix,since_unix):
     url = "https://seeking-alpha.p.rapidapi.com/analysis/v2/list"
 
-    querystring = {until: until_unix,
-    since: since_unix,"id":keyword,"number":"1"}
+    querystring = {"until": until_unix,
+    "since": since_unix,"id":keyword,"number":"1"}
 
     headers = {
         "X-RapidAPI-Key": os.getenv('X-RapidAPI-Key'),
