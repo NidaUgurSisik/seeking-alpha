@@ -83,7 +83,7 @@ def get_values(article_text,labels_from_st_tags):
 c2, c3 = st.columns([50, 1])
 
 with c2:
-    c31, c32 = st.columns([12, 2])
+    c31, c32 = st.columns([24, 4])
     with c31:
         st.caption("")
         st.title("Seeking Alpha")
