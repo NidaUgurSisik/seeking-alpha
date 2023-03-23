@@ -1,4 +1,6 @@
+import datetime
 import os
+import time
 from bs4 import BeautifulSoup
 import streamlit as st
 import requests
@@ -94,7 +96,17 @@ with c2:
         )
     Stock = st.text_input('Stock Name', '')
     Size = st.text_input('How much article do you want ?', '')
-    if Stock and Size:
+    until = st.date_input(
+        "When\'s your birthday",
+        datetime.date(2019, 7, 6))
+    st.write('Your birthday is:', until)
+    until_unix = time.mktime(until.timetuple())
+    since = st.date_input(
+        "When\'s your birthday",
+        datetime.date(2019, 7, 6))
+    since_unix = time.mktime(since.timetuple())
+    st.write('Your birthday is:', since)
+    if Stock and Size and until and since:
         st.write(Size ,' Article for ', Stock, 'Stock')
         articleurl = getArticle(Stock,int(Size))
         article_text = ArticleText(articleurl)
