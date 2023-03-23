@@ -16,7 +16,6 @@ def _max_width_():
     .reportview-container .main .block-container{{
         {max_width_str}
     }}
-
     </style>    
     """,
         unsafe_allow_html=True,
@@ -99,7 +98,6 @@ with c2:
         st.write(Size ,' Article for ', Stock, 'Stock')
         articleurl = getArticle(Stock,int(Size))
         article_text = ArticleText(articleurl)
-
 
 
     form = st.form(key="annotation")
