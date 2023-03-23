@@ -36,8 +36,9 @@ def getArticle(keyword, size):
     response = requests.request("GET", url, headers=headers, params=querystring).json()
     links = []
     for i in range(size):
-        link = 'https://seekingalpha.com' + response['data'][i]['links']['self']
-        links.append(link)
+        st.write(response['data'][i]['links']['self'])
+        '''link = 'https://seekingalpha.com' + response['data'][i]['links']['self']
+        links.append(link)'''
     return links
 
 def ArticleText(links):
