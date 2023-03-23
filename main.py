@@ -36,7 +36,7 @@ def getArticle(keyword, size):
     response = requests.request("GET", url, headers=headers, params=querystring).json()
     links = []
     for i in range(size):
-        link = 'https://seekingalpha.com' + str(response['data'][i]['links']['self'])
+        link = 'https://seekingalpha.com' + response['data'][i]['links']['self']
         links.append(link)
     return links
 
@@ -98,6 +98,7 @@ with c2:
         st.write(Size ,' Article for ', Stock, 'Stock')
         articleurl = getArticle(Stock,int(Size))
         article_text = ArticleText(articleurl)
+
 
 
     form = st.form(key="annotation")
