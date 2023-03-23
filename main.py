@@ -1,14 +1,9 @@
-import re
 import os
-import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 import streamlit as st
 import requests
-from PyPDF2 import PdfReader
-from functionforDownloadButtons import download_button
-from io import StringIO
 from streamlit_tags import st_tags
+import pandas as pd
 API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-mnli"
 
 headers = {"Authorization": f"Bearer {os.getenv('API_KEY')}"}
@@ -35,7 +30,7 @@ def getArticle(keyword, size):
     querystring = {"id":keyword,"size":size,"number":"1"}
 
     headers = {
-        "X-RapidAPI-Key": "7b530f132bmsh9ce89c66c2eb5d1p1864c8jsnd7c0c3f9ed02",
+        "X-RapidAPI-Key": os.getenv('X-RapidAPI-Key'),
         "X-RapidAPI-Host": "seeking-alpha.p.rapidapi.com"
     }
 
@@ -68,7 +63,6 @@ def get_values(article_text,labels_from_st_tags):
 
 
         label_lists = {}
-
         for element in labels_from_st_tags:
             label_lists[element] = []
 
@@ -78,9 +72,14 @@ def get_values(article_text,labels_from_st_tags):
                 "inputs": row,
                 "parameters": {"candidate_labels": labels_from_st_tags},
             })
+            for index_, value in enumerate(output['labels']):
+                label_lists[value].append(round(output['scores'][index_], 2))
+
+        for vals in labels_from_st_tags:
+            df[vals] = label_lists[vals]
 
 
-        return output
+        return df
 
 c2, c3 = st.columns([6, 1])
 
@@ -100,7 +99,6 @@ with c2:
         st.write(Size ,' Article for ', Stock, 'Stock')
         articleurl = getArticle(Stock,int(Size))
         article_text = ArticleText(articleurl)
-        st.write(article_text)
 
 
 
@@ -108,14 +106,15 @@ with c2:
     with form:
 
         labels_from_st_tags = st_tags(
-            value=["account", "credit", "reporting"],
+            value=["positive", "negative"],
             maxtags=5,
-            suggestions=["account", "credit", "reporting"],
+            suggestions=["positive", "negative"],
             label="",
         )
 
         submitted = st.form_submit_button(label="Submit")
 
     if submitted:
+        df = pd.DataFrame(articleurl)
         result = get_values(article_text, labels_from_st_tags)
-        st.write(result)
+        edited_df = st.experimental_data_editor(df)
