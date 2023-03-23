@@ -25,10 +25,11 @@ def _max_width_():
 
 st.set_page_config(page_icon="images/icon.png", page_title="Seeking Alpha")
 
-def getArticle(keyword, size):
+def getArticle(keyword, size,until_unix,since_unix):
     url = "https://seeking-alpha.p.rapidapi.com/analysis/v2/list"
 
-    querystring = {"id":keyword,"size":size,"number":"1"}
+    querystring = {until: until_unix,
+    since: since_unix,"id":keyword,"size":size,"number":"1"}
 
     headers = {
         "X-RapidAPI-Key": os.getenv('X-RapidAPI-Key'),
@@ -109,7 +110,7 @@ with c2:
     st.write('Since', since_unix)
     if Stock and Size and until and since:
         st.write(Size ,' Article for ', Stock, 'Stock')
-        articleurl = getArticle(Stock,int(Size))
+        articleurl = getArticle(Stock,int(Size),until_unix,since_unix)
         article_text = ArticleText(articleurl)
 
 
