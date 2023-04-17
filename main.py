@@ -55,7 +55,7 @@ def ArticleText(links):
         #text = text.split("Summary",1)[1]
         #text = text.split("Seeking Alpha's Disclosure:",1)[0]
         texts.append(text)
-        
+        st.write(text)
     return texts
 
 def get_values(article_text,labels_from_st_tags):
@@ -121,7 +121,7 @@ with c2:
         )
 
         submitted = st.form_submit_button(label="Submit")
-    st.write(article_text)
+    
     if submitted:
         df = pd.DataFrame(articleurl)
         result = get_values(article_text, labels_from_st_tags)
