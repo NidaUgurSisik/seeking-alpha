@@ -123,6 +123,6 @@ with c2:
         submitted = st.form_submit_button(label="Submit")
 
     if submitted:
-        df = pd.DataFrame(articleurl)
+        df = pd.DataFrame(article_text)
         result = get_values(article_text, labels_from_st_tags)
         edited_df = st.experimental_data_editor(df)
