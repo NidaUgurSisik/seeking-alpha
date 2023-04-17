@@ -98,11 +98,11 @@ with c2:
     Stock = st.text_input('Stock Name', '')
     since = st.date_input(
         "Since",
-        datetime.date(2019, 7, 6))
+        datetime.date(2023, 2, 2))
     since_unix = time.mktime(since.timetuple())
     until = st.date_input(
         "Until",
-        datetime.date(2019, 7, 6))
+        datetime.date(2023, 2, 2))
     until_unix = time.mktime(until.timetuple())
 
     if Stock and until and since:
