@@ -121,8 +121,8 @@ with c2:
         )
 
         submitted = st.form_submit_button(label="Submit")
-
+    st.write(article_text)
     if submitted:
-        df = pd.DataFrame(article_text)
+        df = pd.DataFrame(articleurl)
         result = get_values(article_text, labels_from_st_tags)
         edited_df = st.experimental_data_editor(df)
