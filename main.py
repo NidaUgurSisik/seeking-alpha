@@ -52,8 +52,8 @@ def ArticleText(links):
         text = soup.get_text()        
 
         #print(text)
-        text = text.split("Stock Ideas",1)[1]
-        text = text.split("This article",1)[0]
+        text = text.split("Summary",1)[1]
+        text = text.split("Seeking Alpha's Disclosure:",1)[0]
         texts.append(text)
         
     return texts
